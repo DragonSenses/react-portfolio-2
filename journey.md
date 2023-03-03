@@ -206,3 +206,122 @@ export default App
 
 Then write the content within.
 
+# Making **components**
+
+- Make a `components` folder within `src` and then create a `Layout.jsx` file 
+
+Generate the Layout component with `rfc` command. This is from a VSCode Extension - **ES7+ React/Redux/React-Native snippets**.
+
+- Also make a `Main` and `Navbar` component
+
+# Import the components in the App
+
+`App.jsx`
+```jsx
+import { useState } from 'react'
+import Layout from './components/Layout'
+import Main from './components/Main'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <Layout>
+      <Main />
+    </Layout>
+  )
+}
+
+export default App
+```
+
+- Layout will need a both opening and closing tag
+- Main does not need a closing tag, so just give it a self-closing tag
+
+## Pass props in `Layout` and render children
+
+- Receive props in Layout
+- Destructure children from props
+- Inside Layout render out children
+
+Now we can see that Main is rendered at the top within our Layout
+
+```jsx
+import React from 'react'
+
+export default function Layout(props) {
+  const { children } = props;
+  return (
+    <div>
+      {children} 
+    </div>
+  )
+}
+```
+
+## Styling the `Layout`
+
+Now we can style the Layout by giving it a className
+
+```jsx
+export default function Layout(props) {
+  const { children } = props;
+  return (
+    <div className='min-h-screen flex flex-col relative'>
+      {/* ... */}
+    </div>
+  )
+}
+```
+
+Let's wrap the children (i.e., Main component) in a `<main>` tag, so we can target it for styling.
+
+```jsx
+export default function Layout(props) {
+  const { children } = props;
+  return (
+    <div className='min-h-screen flex flex-col relative'>
+      <main className='flex flex-col flex-1'>
+        {children} 
+      </main>
+    </div>
+  )
+}
+```
+
+Now we can add the `Navbar` component above the main:
+
+```jsx
+import React from 'react'
+import Navbar from './Navbar'
+
+export default function Layout(props) {
+  const { children } = props;
+  return (
+    <div className='min-h-screen flex flex-col relative'>
+      <Navbar/>
+      <main className='flex flex-col flex-1'>
+        {children} 
+      </main>
+    </div>
+  )
+}
+```
+
+*Notice*: `import` Navbar at the top. Make sure to do so otherwise it won't render.
+
+We should see in `localhost:5173` that `Navbar` is sitting on top of `Main`.
+
+## Styling Navbar
+
+Give Navbar a className of `sticky-0` so it always sticks to the top of the page. 
+
+```jsx
+export default function Navbar() {
+  return (
+    <div className='sticky-0 flex items-center gap-4 sm:gap-8'>
+      Navbar
+    </div>
+  )
+}
+```
