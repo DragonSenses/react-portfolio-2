@@ -603,3 +603,81 @@ Now in `AboutMe`, on medium screens `md:col-span-3` so it will span 3 columns.
 This will encapsulate the lower half of the page. 
 
 It will contain an array of `experiences` and within the JSX we will map out each experience.
+
+```jsx
+import React from 'react'
+
+export default function Experience() {
+  const experiences = [
+    {
+      company: 'Self',
+      position: 'Senior Level Surveyor of Opportunities',
+      description: "I'm in the process of surveying and completing multiple applications per day. In short, I'm seeking a job."
+    },
+    {
+      company: 'Company 2',
+      position: 'Full Stack Pancake Architect',
+      description: 'I did a whole lot of things but I can\'t really remember them specifically so you\'ll have to take my word on it',
+    },
+    {
+      company: 'Company 3',
+      position: 'Hydro-Ceramics Engineer',
+      description: 'It is a firm habit to immediately cleanse ceramic plates after usage.'
+    }
+  ]
+
+  return (
+    <div className='grid grid-cols-1 md:grid-cols-3 gap-2'>
+      {experiences.map((experience, index) => {
+        return (
+          <div>{experience.company}</div>
+        )
+      })}
+    </div>
+  )
+}
+```
+
+## Fixing the Main Layout to include `Experience` component
+
+Recall in `Main.jsx`
+```jsx
+export default function Main() {
+  return (
+    <div className='p-4 flex flex-col md:grid md:grid-cols-4'>
+      <AboutMe />
+      <Experience />
+      <Skills />
+
+    </div>
+  )
+}
+```
+
+The flex-column layout for screens smaller than medium are fine, but the issue is how the grid layout will work for medium screens. 
+
+I want the `Experience` component to be cover the second half of the page, so essentially want it to be under `AboutMe` in the grid layout. 
+
+So I'm going to wrap both of them in a `div`. 
+
+### Issue: It is still broken on larger screens.
+
+To resolve that, we have to *swap* out the `md:col-span-3` from the `AboutMe`'s first `div` and put it into its parent component. Which is the div we wrapped Experience and AboutMe. 
+
+While we are still here, also give it a flex column because they will always sit on top of one another. Also give a gap of 4. 
+
+Here is what the `Main.jsx` looks like now:
+
+```jsx
+export default function Main() {
+  return (
+    <div className='p-4 flex flex-col md:grid md:grid-cols-4'>
+      <div className="md:col-span-3 flex flex-col gap-4">
+        <AboutMe />
+        <Experience />
+      </div>
+      <Skills />
+    </div>
+  )
+}
+```
