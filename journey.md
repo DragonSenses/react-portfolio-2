@@ -681,3 +681,27 @@ export default function Main() {
   )
 }
 ```
+
+## Wrapping up the Experience component
+
+Let's finish the mapping of each property within the `experiences` array. 
+
+```jsx
+  return (
+    <div className='grid grid-cols-1 md:grid-cols-3 gap-2'>
+      {experiences.map((experience, index) => {
+        return (
+          <div className='flex flex-col gap-1'>
+            <h1 className='text-lg font-bold uppercase'>{experience.company}</h1>
+            <h2 className='text-sm pb-2'>{experience.position}</h2>
+            <p className='text-slate-500'>{experience.description}</p>
+          </div>
+        )
+      })}
+    </div>
+  )
+```
+
+- Notice I wrapped each one in an element, then I gave a gradient to both color and text-size
+
+# 

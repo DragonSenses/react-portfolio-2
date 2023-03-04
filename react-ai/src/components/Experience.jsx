@@ -3,7 +3,7 @@ import React from 'react'
 export default function Experience() {
   const experiences = [
     {
-      company: 'Self',
+      company: 'Company 1',
       position: 'Senior Level Surveyor of Opportunities',
       description: "I'm in the process of surveying and completing multiple applications per day. In short, I'm seeking a job."
     },
@@ -23,7 +23,11 @@ export default function Experience() {
     <div className='grid grid-cols-1 md:grid-cols-3 gap-2'>
       {experiences.map((experience, index) => {
         return (
-          <div>{experience.company}</div>
+          <div className='flex flex-col gap-1'>
+            <h1 className='text-lg font-bold uppercase'>{experience.company}</h1>
+            <h2 className='text-sm pb-2'>{experience.position}</h2>
+            <p className='text-slate-500'>{experience.description}</p>
+          </div>
         )
       })}
     </div>
