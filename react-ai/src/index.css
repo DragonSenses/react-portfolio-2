@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.underline-on-hover {
+  @apply after:absolute after:bottom-0 after:w-full
+  after:h-[2px] after:right-full after:bg-purple-500
+  hover:after:translate-x-full after:duration-300
+  overflow-hidden;
+}
