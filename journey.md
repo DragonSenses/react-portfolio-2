@@ -413,4 +413,121 @@ On Mobile, would want to switch the order to profile, main and then sidebar.
 - Center the components
 - On small screens make a single column, then medium screens became a grid layout with 3 columns.
 
+```jsx
+export default function Main() {
+  return (
+    <div className='p-4 flex flex-col md:grid md:grid-cols-3 place-items-center'>
+      <AboutMe />
+      <Experience />
+      <Skills />
 
+    </div>
+  )
+}
+```
+
+- Also going to change the background color, text-size & color so in `Layout`:
+
+```jsx
+export default function Layout(props) {
+  const { children } = props;
+  return (
+    <div className='min-h-screen flex flex-col relative 
+      bg-slate-100 text-slate-900 text-xs sm:text-sm'>
+      <Navbar/>
+      <main className='flex flex-col flex-1'>
+        {children} 
+      </main>
+    </div>
+  )
+}
+```
+
+## `Aboutme` section 
+
+- Full name in big text
+- smaller header for occupation
+- paragraph for small introduction
+- 2 buttons that will open up a modal for our projects and contact form respectively
+
+```jsx
+import React from 'react'
+
+export default function AboutMe() {
+  return (
+    <div className='flex flex-col gap-4'>
+      <h1 className='font-bold text-4xl sm:text-6xl'>firstName lastName</h1>
+      <h2 className='font-medium text-slate-800 
+        text-lg sm:text-2xl'>Occupation | Occupation 2</h2>
+      <p className='text-slate-500'>I have an ardent passion of creating sites 
+      using the latest technology. Lorem ipsum dolor sit amet consectetur 
+      adipisicing elit. Dolores consequuntur a, ipsam modi culpa at!</p>
+      <div className="my-10 flex items-center gap-4 text-sm sm:text-base">
+        <button className='rounded-full bg-gradient-to-r from-blue-700 to-violet-700 
+        text-white px-4 py-2 hover:opacity-70'>projects</button>
+        <button className='rounded-full text-purple-800 
+        border border-solid border-violet-800 px-4 py-2 
+        hover:opacity-70'>contact</button>
+      </div>
+    </div>
+  )
+}
+```
+
+### Applying a `transition duration`
+
+I want the buttons to have a transition duration, so let's go to `index.css` and apply it everywhere.
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  transition-duration: 250ms;
+}
+```
+
+On second thought, I reverted this change and just applied it to the buttons.
+
+# Design change
+
+Previously, I had decided to have 3 columns as components. But it makes a bit more sense to have the first 2 sections divided horizontally rather vertically as a column. 
+
+So going across as one section, the `AboutMe` component will contain the 2 columns needed and have a profile image.
+
+On the other hand, the bottom section will contain the information. 
+
+The skills section will remain unchanged.
+
+## Adjustments to our code
+
+Wrap the content of the `AboutMe` content in a div
+
+```jsx
+import React from 'react'
+
+export default function AboutMe() {
+  return (
+    <div className="flex flex-col">
+      <div className='flex flex-col gap-4'>
+        <h1 className='font-bold text-4xl sm:text-6xl'>firstName lastName</h1>
+        <h2 className='font-medium text-slate-800 
+          text-lg sm:text-2xl'>Occupation | Occupation 2</h2>
+        <p className='text-slate-500'>I have an ardent passion of creating sites 
+        using the latest technology. Lorem ipsum dolor sit amet consectetur 
+        adipisicing elit. Dolores consequuntur a, ipsam modi culpa at!</p>
+        <div className="my-10 flex items-center gap-4 text-sm sm:text-base">
+          <button className='rounded-full bg-gradient-to-r from-blue-700 to-violet-700 
+          text-white px-4 py-2 hover:opacity-70 transition transition-duration:250ms'>projects</button>
+          <button className='rounded-full text-purple-800 
+          border border-solid border-violet-800 px-4 py-2 
+          hover:opacity-70 transition transition-duration:250ms'>contact</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+Let's add a profile image. 
