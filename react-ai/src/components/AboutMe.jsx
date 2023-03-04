@@ -1,10 +1,14 @@
 import React from 'react'
+import profilePic from '../assets/profile-pic.png'
 
 export default function AboutMe() {
   return (
     <div className="flex flex-col">
       <div className='flex flex-col gap-4'>
         <h1 className='font-bold text-4xl sm:text-6xl'>firstName lastName</h1>
+        <img className='mx-auto md:hidden h-[200px] aspect-square rounded-full shadow-lg'
+          alt = 'my profile picture'
+          src = {profilePic} />
         <h2 className='font-medium text-slate-800 
           text-lg sm:text-2xl'>Occupation | Occupation 2</h2>
         <p className='text-slate-500'>I have an ardent passion of creating sites 

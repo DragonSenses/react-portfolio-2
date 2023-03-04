@@ -531,3 +531,9 @@ export default function AboutMe() {
 ```
 
 Let's add a profile image. 
+
+```jsx
+<img className='mx-auto h-[200px] aspect-square rounded-full shadow-lg'
+  alt = 'my profile picture'
+  src = {profilePic} />
+```
