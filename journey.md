@@ -749,3 +749,44 @@ export default function Skills() {
   )
 }
 ```
+
+Now adding styles so far:
+
+```jsx
+export default function Skills() {
+  return (
+    <div className='shadow-xl p-3 bg-white rounded flex flex-col gap-4'>
+      <div className='flex flex-col gap-2'>
+        <h1 className='text-4xl'>Info</h1>
+        <div className="flex items-center gap-1 text-base">
+          <h3 className='font-semibold'>Email</h3>
+          <a className='text-cyan-500' 
+          href="mailto:demoemail@gmail.com">demoemail@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <h1 className='text-4xl'>Skills</h1>
+      </div>
+      <div>
+        <h1 className='text-4xl'>Interests</h1>
+      </div>
+    </div>
+  )
+}
+```
+
+## Adding a ***hover underline effect***
+
+I also want the email to have a hover effect. So this is what we add to the div:
+
+```jsx
+  <div className="flex items-center gap-1 text-base
+  relative after:absolute after:bottom-0 after:w-full
+  after:h-[2px] after:right-full after:bg-purple-500
+  hover:after:translate-x-full after:duration-300
+  overflow-hidden">
+    <h3 className='font-semibold'>Email</h3>
+    <a className='text-cyan-500' 
+    href="mailto:demoemail@gmail.com">demoemail@gmail.com</a>
+  </div>
+```
