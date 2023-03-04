@@ -307,6 +307,7 @@ export default function Layout(props) {
   )
 }
 ```
+- `flex flex-col flex-1` so it occupies as much space as it can
 
 *Notice*: `import` Navbar at the top. Make sure to do so otherwise it won't render.
 
@@ -319,9 +320,81 @@ Give Navbar a className of `sticky-0` so it always sticks to the top of the page
 ```jsx
 export default function Navbar() {
   return (
-    <div className='sticky-0 flex items-center gap-4 sm:gap-8'>
+    <div className='sticky-0 flex justify-between items-center gap-4 sm:gap-8'>
       Navbar
     </div>
   )
 }
+```
+
+- Define a links component (an array) which will store 2-element arrays
+  - The first item is the name & second item is the link to that element
+
+Something like this:
+
+```jsx
+  const links = [
+    ['Email', "mailto:me@example.com"],
+    ['GitHub', "https://github.com/yourNameHere"],
+    ['YouTube', "https://google.com"]
+  ];
+```
+
+So later we can map the contents of the links out. 
+- Destructure each link and an index
+- Use an arrow function to return some JSX, an anchor tag
+- Anchor tag should the reference and link name, along with the `target="_blank" rel="noreferrer"` so it opens up on a new tab
+
+```jsx
+{links.map( (link, index) => {
+  return (
+    <a href={link[1]} target="_blank" rel="noreferrer">{link[0]}</a>
+  )
+})}
+```
+
+- Let's wrap the code above in its own div so `justify-between` can apply to only the header and Navigation Links respectively.
+
+- Then give it a padding of 4 for the entire component so it pushes everything in a little bit.
+
+- Also wrap the Navbar Header Title in an anchor tag that refers back to the main page
+
+```jsx
+import React from "react";
+
+export default function Navbar() {
+  const links = [
+    ["Blog", "https://google.com"],
+    ["Email", "mailto:me@example.com"],
+    ["GitHub", "https://github.com/DragonSenses"],
+  ];
+
+  return (
+    <div className="sticky-0 flex justify-between items-center gap-4 sm:gap-8
+      p-4">
+      <a href='/'>Navbar Title Header</a>
+
+      <div className="flex items-center gap-4">
+        {links.map((link, index) => {
+          return (
+            <a href={link[1]} target="_blank" rel="noreferrer">
+              {link[0]}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+```
+
+### Mobile-First
+
+Let's set the text to be small on mobile, then raise it up a bit on small screens
+- Also want the Navbar Title Header to be slightly larger than the subsequent text
+
+```jsx
+    <div className="sticky-0 flex justify-between items-center gap-4 sm:gap-8
+      p-4 text-xs sm:text-sm">
+      <a className='text-sm sm:text-base' href='/'>Navbar Title Header</a>
 ```
