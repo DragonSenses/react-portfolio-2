@@ -601,3 +601,5 @@ Now in `AboutMe`, on medium screens `md:col-span-3` so it will span 3 columns.
 # Experience Component
 
 This will encapsulate the lower half of the page. 
+
+It will contain an array of `experiences` and within the JSX we will map out each experience.
