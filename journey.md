@@ -704,4 +704,48 @@ Let's finish the mapping of each property within the `experiences` array.
 
 - Notice I wrapped each one in an element, then I gave a gradient to both color and text-size
 
-# 
+# Now onto the `Skills` component
+
+Let's give it a white background to give a nice contrast
+
+```jsx
+import React from 'react'
+
+export default function Skills() {
+  return (
+    <div className='shadow bg-white'>
+
+    </div>
+  )
+}
+```
+
+## **Make components occupy the full length of the page**
+
+Notice how the skills section with a white background only covers a portion of the page.
+
+We can do this by following where its rendered which is `Main` component as its rendered inside the `Layout`. Now let's give `Main` component a `flex-1`, which allows a flex item to grow and shrink as needed, ignoring its initial size. 
+
+## Dividing skills in sections in the side bar
+
+Going to have 3 topics under the side bar: Info, Skills, Interests
+
+```jsx
+import React from 'react'
+
+export default function Skills() {
+  return (
+    <div className='shadow-xl p-3 bg-white rounded flex flex-col gap-4'>
+      <div>
+        <h1>Info</h1>
+      </div>
+      <div>
+        <h1>Skills</h1>
+      </div>
+      <div>
+        <h1>Interests</h1>
+      </div>
+    </div>
+  )
+}
+```
