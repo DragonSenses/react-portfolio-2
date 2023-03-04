@@ -388,7 +388,7 @@ export default function Navbar() {
 }
 ```
 
-### Mobile-First
+### Mobile-First 
 
 Let's set the text to be small on mobile, then raise it up a bit on small screens
 - Also want the Navbar Title Header to be slightly larger than the subsequent text
@@ -398,3 +398,19 @@ Let's set the text to be small on mobile, then raise it up a bit on small screen
       p-4 text-xs sm:text-sm">
       <a className='text-sm sm:text-base' href='/'>Navbar Title Header</a>
 ```
+
+# Now let's move on to the main section
+
+Note: the design will have 3 sections: main, profile and sidebar in that order.
+
+On Mobile, would want to switch the order to profile, main and then sidebar.
+
+- Let's create exponents -> `AboutMe.jsx`, `Experience.jsx` and `Skills.jsx`.
+
+`rfc` command, to make them React Functional Components
+
+- Render components in the `Main`
+- Center the components
+- On small screens make a single column, then medium screens became a grid layout with 3 columns.
+
+
