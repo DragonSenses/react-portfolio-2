@@ -530,10 +530,74 @@ export default function AboutMe() {
 }
 ```
 
-Let's add a profile image. 
+
+Let's add a profile image, place it under the `<h1>`. 
 
 ```jsx
 <img className='mx-auto h-[200px] aspect-square rounded-full shadow-lg'
   alt = 'my profile picture'
   src = {profilePic} />
 ```
+
+## Responsive Design choice for the image
+
+- On small screens and smaller, we have image in a on column layout right under the header
+- On medium screens and larger, we have the image show up on the right side of the `AboutMe` component
+
+Then place the same image right under the second to last `<div>`, but give with a few tweaks to the class. 
+
+We also have the entire div an `md:grid md:grid-cols-2` to split into 2 columns.
+
+```jsx
+import React from 'react'
+import profilePic from '../assets/profile-pic.png'
+
+export default function AboutMe() {
+  return (
+    <div className="flex flex-col ">
+      <div className='flex flex-col gap-3'>
+        <h1 className='font-bold text-4xl sm:text-6xl'>firstName lastName</h1>
+        <img className='mx-auto md:hidden h-[200px] aspect-square rounded-full shadow-lg'
+          alt = 'my profile picture'
+          src = {profilePic} />
+        {/* ... */}
+      </div>
+      <img className='mx-auto hidden md:flex h-[200px] aspect-square rounded-full shadow-lg'
+          alt = 'my profile picture'
+          src = {profilePic} />
+    </div>
+  )
+}
+```
+
+So on medium screens @ grid-cols-2 we can render the image out again. The second image has a default of hidden, but an `md:flex`.
+
+> Going to wrap the both the header text and img in a div with a className of flex items-center
+
+```jsx
+  <div className="flex items-center">
+    <h1 className='font-bold text-4xl sm:text-6xl'>firstName lastName</h1>
+    <img className='mx-auto md:hidden h-[200px] aspect-square rounded-full shadow-lg'
+      alt = 'my profile picture'
+      src = {profilePic} />
+  </div>
+```
+
+
+## Funny Issue: image ok on mobile/small but overlaps with header on medium screens
+
+- Fix: In `Main.jsx` we have to change `md:grid-cols-3` to `md:grid-cols-2`
+
+## Funny Issue 2: The text goes behind the image, somewhere around medium - 768px min-width
+
+- Issue fixed when AboutMe component and image are given more columns to span, see below
+
+# Design choice - Have sidebar component take up ~1/4 of space, the Main and the rest of the components take up ~3/4
+
+To implement this, inside of `Main` set it grid-cols to 4 on medium screens.
+
+Now in `AboutMe`, on medium screens `md:col-span-3` so it will span 3 columns.
+
+# Experience Component
+
+This will encapsulate the lower half of the page. 
