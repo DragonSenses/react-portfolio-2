@@ -790,3 +790,49 @@ I also want the email to have a hover effect. So this is what we add to the div:
     href="mailto:demoemail@gmail.com">demoemail@gmail.com</a>
   </div>
 ```
+
+## Code reuse - Using @apply directive to make a custom utility class.
+
+Let's move all that class code regarding the underline hover effect out and into the `index.css`. Turn it into a custom utility class so that we can shorten the className.
+
+In `index.css`
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.underline-on-hover {
+  @apply after:absolute after:bottom-0 after:w-full
+  after:h-[2px] after:right-full after:bg-purple-500
+  hover:after:translate-x-full after:duration-300
+  overflow-hidden;
+}
+```
+
+Now we can shorten the className like this with the class `underline-on-hover`:
+
+```jsx
+  <div className="flex items-center gap-1 text-base
+  relative underline-on-hover">
+    <h3 className='font-semibold'>Email</h3>
+    <a className='text-cyan-500' 
+    href="mailto:demoemail@gmail.com">demoemail@gmail.com</a>
+  </div>
+```
+
+Repeat that code above for however many times you'd want, not just for email but GitHub, LinkedIn, or any other sites you'd want. Make sure to add attributes `target="_blank" rel="noreferrer"` to the anchor tag to open in new tab.
+
+## Skills subsection of sidebar
+
+```jsx
+<div>
+  <h1 className='text-4xl'>Skills</h1>
+  <div className="flex items-center gap-2 flex-wrap">
+    
+  </div>
+</div>
+```
+- Want the items to centered, and flex-wrap to wrap onto next line
+
+We will create a JavaScript object with the key as the category of skills, and value as an array of known skills relevant to that category.
+
