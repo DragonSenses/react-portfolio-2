@@ -941,7 +941,7 @@ Then we map out each `li` with a `key` attribute, wrapping the `<a>` tag.
 
 ### Second Approach
 
-Let's preserve our array and use the `index` as the key
+Let's preserve our array and use the `index` that we destructured as the key
 
 ```jsx
 const links = [
@@ -962,3 +962,132 @@ const links = [
 ```
 
 Now it's up to you what is more readable. I'm going to use both approaches and use the second approach for `Navbar` and use the first approach for `Experience`, since `experiences` is an object already I'm just going to use index as the unique key.
+
+## ***Takeaway*** Every `map` the parent `div` or container needs to return a `key` which we can set to `index` or some unique `id`
+
+# Mapping out skills section
+
+Now that we covered how to render lists and map things out. In `Skills` component we have:
+
+```jsx
+  const abilities = {
+    JavaScript: ['React', 'Node.js', 'Express.js', 'React Native', 'SvelteKit'],
+    Java: ['Spring', 'Apache Maven'],
+    Web: ['Git','TailwindCSS', 'SASS', 'Firebase', 'MonogoDB', 'SQL', 'NoSQL', 'Netlify', 'Docker','Kubernetes'],
+    Design: ['Adobe InDesign','PhotoShop', 'Pixlr', 'Figma'],
+  }
+```
+
+A JavaScript object that contains `keys` or property names, and the `values` as an array of those abilities related to the `key` or property name. 
+
+So we have to take the keys of the `abilities` object, then map each `keyName` and destructure the `index` so we can use it as the `id` for `key` attribute. 
+
+```jsx
+  {Object.keys(abilities).map((keyName, index) => {
+      return(
+        <div className="" key={index}>
+        <h3>{keyName}</h3>
+
+```
+
+***NOTE*** make sure it is `Object` and not `Objects`. 
+
+### A second mapping
+
+Inside the JSX element thats returned by the mapping of `abilities`, I want a second mapping of each skill related to the `keyName`. Note that we use the [Square Brackets notation](https://javascript.info/object#square-brackets) to access `keyName` before we `map`.
+
+```jsx
+<div className="flex items-center gap-2 flex-wrap">
+  {Object.keys(abilities).map((keyName, index) => {
+    return(
+      <div className="" key={index}>
+        <h3>{keyName}</h3>
+        <div className="flex items-center gap-2 flex-wrap">
+          {abilities[keyName].map( (skill, i) => {
+            return (
+              <div key={i}
+              className="rounded-full bg-gradient-to-r from-blue-700 to-violet-700 
+              text-white px-4 py-2 text-xs">
+                  {skill}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  })}
+</div>
+```
+
+These buttons will also have similar `classNames` to the `projects` button in `AboutMe`, but with a few changes.
+
+I'm still deciding if I should create a custom utility class for it since it is only used once, in this mapping. But here is the className with the changes:
+
+```jsx
+<div className="flex items-center gap-2 flex-wrap">
+  {Object.keys(abilities).map((keyName, index) => {
+    return(
+      <div className="" key={index}>
+        <h3 className="text-lg">{keyName}</h3>
+        <div className="flex items-center gap-2 flex-wrap">
+          {abilities[keyName].map( (skill, i) => {
+            return (
+              <div key={i}
+              className="rounded bg-gradient-to-r from-blue-700 to-violet-700 
+              text-white px-2 py-1 text-xs">
+                  {skill}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  })}
+</div>
+```
+
+-Increased `h3` text size, decreased skill padding and text size, changed to rounded
+
+Also want space in between each of the `abilities`. So wrap the entire mapping inside of a `div` with `flex flex-col gap-3`
+
+## Another requirement -> change skills to have scrollbar
+
+Substitute the `flex-wrap` of the `div` containing the second mapping, with `overflow-scroll` which allows to scroll along the different sections. 
+
+- Also change `items-center` to `items-stretch` so all skills occupy the same height
+
+- Also to remove the *new line* so each skill has the same height we add to the `className` a `whitespace-nowrap` 
+
+Here are the changes in the Skills subsection:
+
+```jsx
+      <div>
+        <h1 className='text-4xl pb-2'>Skills</h1>
+        {/* <div className="flex items-center gap-2 flex-wrap"> */}
+          <div className="flex flex-col gap-3">
+            {Object.keys(abilities).map((keyName, index) => {
+              return(
+                <div className="" key={index}>
+                  <h3 className="text-lg">{keyName}</h3>
+                  <div className="flex overflow-scroll items-stretch gap-2">
+                    {abilities[keyName].map( (skill, i) => {
+                      return (
+                        <div key={i}
+                        className="rounded bg-gradient-to-r from-blue-700 to-violet-700 
+                        text-white px-2 py-1 text-xs whitespace-nowrap">
+                            {skill}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        {/* </div> */} 
+      </div>
+```
+
+I also removed the div parent div container.
+
+Hmm perhaps I would want that depending on the screen. 
