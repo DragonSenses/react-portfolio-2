@@ -961,4 +961,4 @@ const links = [
 })}
 ```
 
-Now it's up to you what is more readable. I'm going to use both approaches and use the second approach for `Navbar` and use the first approach for `Experience`. 
+Now it's up to you what is more readable. I'm going to use both approaches and use the second approach for `Navbar` and use the first approach for `Experience`, since `experiences` is an object already I'm just going to use index as the unique key.

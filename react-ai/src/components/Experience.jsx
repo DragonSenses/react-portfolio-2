@@ -15,7 +15,7 @@ export default function Experience() {
     {
       company: 'Company 3',
       position: 'Hydro-Ceramics Engineer',
-      description: 'It is a firm habit to immediately cleanse ceramic plates after usage.'
+      description: 'It is a firm habit of mine to immediately cleanse ceramic plates after usage.'
     }
   ]
 
@@ -23,11 +23,13 @@ export default function Experience() {
     <div className='grid grid-cols-1 md:grid-cols-3 gap-2'>
       {experiences.map((experience, index) => {
         return (
-          <div className='flex flex-col gap-1'>
-            <h1 className='text-lg font-bold uppercase'>{experience.company}</h1>
-            <h2 className='text-sm pb-2'>{experience.position}</h2>
-            <p className='text-slate-500'>{experience.description}</p>
-          </div>
+          <li key={index} className="className list-none">
+            <div className='flex flex-col gap-1'>
+              <h1 className='text-lg font-bold uppercase'>{experience.company}</h1>
+              <h2 className='text-sm pb-2'>{experience.position}</h2>
+              <p className='text-slate-500'>{experience.description}</p>
+            </div>
+          </li>
         )
       })}
     </div>
