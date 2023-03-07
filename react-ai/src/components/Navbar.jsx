@@ -15,9 +15,11 @@ export default function Navbar() {
       <div className="flex items-center gap-4">
         {links.map((link, index) => {
           return (
-            <a href={link[1]} target="_blank" rel="noreferrer">
-              {link[0]}
-            </a>
+            <li key={index} className="list-none">
+              <a href={link[1]} target="_blank" rel="noreferrer">
+                {link[0]}
+              </a>
+            </li>
           );
         })}
       </div>

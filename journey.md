@@ -836,3 +836,129 @@ Repeat that code above for however many times you'd want, not just for email but
 
 We will create a JavaScript object with the key as the category of skills, and value as an array of known skills relevant to that category.
 
+
+# Side Note on a **Warning** in Chrome Dev Tools
+
+```
+react-jsx-dev-runtime.development.js:87 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `Navbar`. See https://reactjs.org/link/warning-keys for more information.
+ at a
+    at Navbar
+    at div
+    at Layout (http://localhost:5173/src/components/Layout.jsx:20:5)
+    at App (http://localhost:5173/src/App.jsx:22:29)
+```
+
+So `Navbar.js` looks like this:
+
+```jsx
+  const links = [
+    ["Blog", "https://google.com"],
+    ["Email", "mailto:me@example.com"],
+    ["GitHub", "https://github.com/DragonSenses"],
+  ];
+
+  return (
+    <div className="sticky-0 flex justify-between items-center gap-4 sm:gap-8
+      p-4 text-xs sm:text-sm">
+      <a className='text-sm sm:text-base' href='/'>Navbar Title Header</a>
+
+      <div className="flex items-center gap-4">
+        {links.map((link, index) => {
+          return (
+            <a href={link[1]} target="_blank" rel="noreferrer">
+              {link[0]}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+```
+
+Back at the [React Docs Beta - Rendering Lists](https://beta.reactjs.org/learn#rendering-lists). 
+
+When using a `for` loop or `array map()` function to render lists of components, e.g., an array of products: 
+
+```jsx
+const products = [
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
+];
+```
+
+Inside your component, use the `map()` function to transform an array of products into an array of `<li>` items:
+
+```jsx
+const listItems = products.map(product =>
+  <li key={product.id}>
+    {product.title}
+  </li>
+);
+
+return (
+  <ul>{listItems}</ul>
+);
+```
+
+Notice how `<li>` has a `key` attribute. **For each item in a list, you should pass a string or a number that uniquely identifies that item among its siblings.** Usually, a key should be coming from your data, such as a database ID. React will rely on your keys to understand what happened if you later insert, delete, or reorder the items.
+
+There are 2 Approaches:
+
+1. Convert our array of `links` into objects 
+
+or 
+
+2. Use index as the `key`
+
+In both approaches though we have to remove the list styling type. So add this to attribute to `<li>` -> `className="list-none"`
+
+### First Approach
+
+Let's convert our `links` an array of arrays to an array of objects with `title`, `url`, and `id`:
+
+```jsx
+  const links = [
+    {title: "Blog", url: "https://google.com", id: "1"},
+    {title: "email", url: "mailto:me@example.com", id: "2"},
+    {title: "GitHub", url: "https://github.com/DragonSenses", id: "3"},
+  ];
+```
+
+Then we map out each `li` with a `key` attribute, wrapping the `<a>` tag.
+
+```jsx
+{links.map( link =>
+  <li key = {link.id} className="list-none">
+    <a href={link.url} target="_blank" rel="noreferrer">
+      {link.title}
+    </a>
+  </li>
+)}
+```
+
+### Second Approach
+
+Let's preserve our array and use the `index` as the key
+
+```jsx
+const links = [
+  ["Blog", "https://google.com"],
+  ["Email", "mailto:me@example.com"],
+  ["GitHub", "https://github.com/DragonSenses"],
+];
+
+{links.map((link, index) => {
+  return (
+    <li key={index} className="list-none">
+      <a href={link[1]} target="_blank" rel="noreferrer">
+        {link[0]}
+      </a>
+    </li>
+  );
+})}
+```
+
+Now it's up to you what is more readable. I'm going to use both approaches and use the second approach for `Navbar` and use the first approach for `Experience`. 
