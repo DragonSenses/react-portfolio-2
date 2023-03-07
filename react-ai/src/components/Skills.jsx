@@ -3,8 +3,9 @@ import React from 'react'
 export default function Skills() {
   const abilities = {
     JavaScript: ['React', 'Node.js', 'Express.js', 'React Native', 'SvelteKit'],
-    Java: ['Java 8', 'Spring', 'Apache Maven'],
-    Web: ['Git','TailwindCSS', 'SASS', 'Firebase', 'MonogoDB', 'SQL', 'NoSQL', 'Netlify', 'Docker','Kubernetes'],
+    Java: ['Java 8', ,'JUnit5', 'Spring', 'Apache Maven'],
+    Web: ['Git','TailwindCSS', 'SASS', 'Firebase', 'Netlify', 'Docker','Kubernetes'],
+    Database: ['MonogoDB', 'SQL', 'NoSQL',],
     Design: ['Adobe InDesign','PhotoShop', 'Pixlr', 'Figma'],
   }
 
@@ -48,7 +49,7 @@ export default function Skills() {
             return(
               <div className="" key={index}>
                 <h3 className="text-lg">{keyName}</h3>
-                <div className="flex overflow-auto items-stretch gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   {abilities[keyName].map( (skill, i) => {
                     return (
                       <div key={i}
