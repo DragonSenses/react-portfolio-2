@@ -1114,3 +1114,91 @@ Now head over to [Free Font Awesome Icons](https://fontawesome.com/search?o=r&m=
   </div>
 </div>
 ```
+
+Later on was going to add a list to further explain my interests, but since I'm approaching a minimalist design I decided against it. But I will add it here for completeness.
+
+```jsx
+<ul className='flex flex-col gap-2'>
+  <li><i className="fa-solid fa-dumbbell"></i> I am into fitness and exercise.</li>
+  <li><i className="fa-solid fa-mug-hot"></i> Avid enjoyer of tea. New to coffee.</li>
+  <li><i className="fa-solid fa-dog"></i> I grew up with dogs ranging from <strong>chihuahuas</strong> to <strong>rottweilers</strong>
+    <p><i className="fa-solid fa-paw"></i> and I loved every single one of them.</p></li>
+  <li><i className="fa-solid fa-book-open-reader"></i> Love to read, whether its for improvement or just for fun</li>
+  <li><i className="fa-solid fa-pen-fancy"></i> I'm a writer and fountain pens are great</li>
+  <li><i className="fa-solid fa-dragon"></i> Dragons are cool.</li>
+</ul>
+```
+
+# Configure the projects and contact
+
+In AboutMe, change second button contact to anchor tag with href mailto:youremail@gmail.com
+
+For the projects `button` we are going to have some state. Really good resource on [React State](https://beta.reactjs.org/learn/state-a-components-memory). A local variable is ill-suited  for the task because:
+
+1. Local variables don’t persist between renders. When React renders this component a second time, it renders it from scratch—it doesn’t consider any changes to the local variables.
+
+2. Changes to local variables won’t trigger renders. React doesn’t realize it needs to render the component again with the new data.
+
+To update a component with new data, two things need to happen:
+
+1. Retain the data between renders.
+
+2. Trigger React to render the component with new data (re-rendering).
+
+The `useState` Hook provides those two things:
+
+1. A state variable to retain the data between renders.
+2. A state setter function to update the variable and trigger React to render the component again.
+
+We can convert a local variable like so:
+
+```jsx
+let index = 0; // replace this line with
+
+const [index, setIndex] = useState(0);
+```
+
+> The [ and ] syntax here is called [array destructuring](https://javascript.info/destructuring-assignment) and it lets you read values from an array. 
+
+> **The array returned by `useState` always has exactly two items.**
+
+Now in another function called `handleClick`, this is how `index` and `setIndex` work together:
+
+```jsx
+function handleClick() {
+  setIndex(index + 1);
+}
+```
+
+Functions starting with `use` are called [*Hooks*](https://beta.reactjs.org/learn#using-hooks). 
+
+`useState` is a built-in Hook provided by React. 
+
+Often you'll need components to *share data and always update together*. To do that you need to **move the state from the individual components *"upwards"* to the closest component containing all of them**.
+
+In our case, since the Modal will be used in `AboutMe` we will want to have it in `Main` so this state is shared across all components.
+
+## Adding state for the Modal
+
+So we need to head over to `Main.jsx`
+
+```jsx
+import { useState } from 'react'
+
+// or you can also combine this with the default React import, like this:
+import React, { useState } from 'react'
+```
+
+But its up to personal preference, in my case I would probably go with the former for now since I want to keep `default` imports and named imports separately. Check out [JavaScript Export and Import](https://javascript.info/import-export). 
+
+In short, **Named exports** force us ot use exactly the right name to import. **Default exports**, allows us to always choose the name when importing. 
+
+Let's add this line right below the `Main` function, but above the `return` 
+
+```jsx
+  const [showModal, setShowModal] = useState(false);
+```
+
+#### Create new component `Modal`
+
+In `components` create `Modal.jsx`
