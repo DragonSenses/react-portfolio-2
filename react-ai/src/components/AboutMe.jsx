@@ -20,9 +20,9 @@ export default function AboutMe() {
         <div className="my-10 flex items-center gap-4 text-sm sm:text-base">
           <button className='rounded-full bg-gradient-to-r from-blue-700 to-violet-700 
           text-white px-4 py-2 hover:opacity-70 transition transition-duration:250ms'>projects</button>
-          <button className='rounded-full text-purple-800 
+          <a href="mailto:youremail@gmail.com" className='rounded-full text-purple-800 
           border border-solid border-violet-800 px-4 py-2 
-          hover:opacity-70 transition transition-duration:250ms'>contact</button>
+          hover:opacity-70 transition transition-duration:250ms'>contact</a>
         </div>
       </div>
       <img className='mx-auto hidden md:flex h-[200px] aspect-square rounded-full shadow-lg'
