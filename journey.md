@@ -1202,3 +1202,74 @@ Let's add this line right below the `Main` function, but above the `return`
 #### Create new component `Modal`
 
 In `components` create `Modal.jsx`
+
+- rfc (React Functional Component)
+
+Now go to `index.html` and define a second root: 
+
+```html
+  <body>
+    <div id="root"></div>
+    <div id="portal"></div>
+```
+
+The second div doesn't contain any information. Now back to `Modal.jsx`, we do these things:
+
+- `import ReactDOM` from `react`
+- return `ReactDOM.createPortal()`
+- inside the createPortal we pass in a `<div>, 'portal'` a div and the id so it knows what portal to create
+
+This syntax will render out this portal inside of our second modal.
+
+To make sure this works, back to the index we have to give the body a class name of relative. Because that is what our portal is going to be relative to.
+
+```html
+  <body class="relative">
+    <div id="root"></div>
+    <div id="portal"></div>
+```
+and here is what `Modal.jsx` looks like
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+export default function Modal() {
+  return ReactDOM.createPortal(
+    <div>
+      Modal
+    </div>,
+    document.getElementById('portal')
+  )
+}
+```
+Since we are at it, we can give the `<div>` a className to style with TailwindCSS. Here is what I have so far:
+
+```jsx
+  <div className='absolute inset-0 bg-purple-300 z-50'>
+    Modal
+  </div>
+```
+
+Back to the `Main` we can use the state variable to help us decide whether to render the `Modal` component 
+
+```jsx
+// ... more imports 
+import Modal from './Modal'
+
+
+export default function Main() {
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <div className='p-4 flex flex-col flex-1 md:grid md:grid-cols-4 gap-4'>
+
+      { showModal && <Modal /> }
+
+      { /* ... */}
+    </div>
+  )
+}
+```
+
+Now let's set the initial value, the argument that we passed into `useState()` (which is `false`) in this case to `true` to see our Modal. 
