@@ -1213,7 +1213,30 @@ Now go to `index.html` and define a second root:
     <div id="portal"></div>
 ```
 
-The second div doesn't contain any information. Now back to `Modal.jsx`, we do these things:
+The second div doesn't contain any information. We will be creating a [Portal](https://reactjs.org/docs/portals.html). 
+
+> Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+
+```jsx
+ReactDOM.createPortal(child, container)
+```
+The first argument (child) is any renderable React child, such as an element, string, or fragment. The second argument (container) is a DOM element.
+
+> A typical use case for portals is when a parent component has an `overflow: hidden` or `z-index` style, but you need the child to visually "break out" of its container. For example, dialogs, hovercards, and tooltip.
+
+## Portals in React
+
+Here is a good [stack overflow post on Portals](https://stackoverflow.com/questions/46393642/how-to-use-reactdom-createportal-in-react-16)
+
+Generally, when rendering any React application, a single DOM element is used to render the whole React tree. As you can see we are rendering our react component into a DOM element having id `root`.
+
+## **What is Portal and why is it needed? Why is it there?**
+
+Portals are a way to render React children outside the main DOM hierarchy of the parent component **without losing the react context**. Important because very popular libraries like `react-router`, `redux` heavily uses the react context. So context availability when using Portal is very helpful.
+
+So, with portals, you can render a parallel react tree onto another DOM node when needed. Even though it is rendered in the different DOM node, parent component can catch the uncaught events.
+
+## Now back to `Modal.jsx`, let's set up the portal
 
 - `import ReactDOM` from `react`
 - return `ReactDOM.createPortal()`
@@ -1273,3 +1296,44 @@ export default function Main() {
 ```
 
 Now let's set the initial value, the argument that we passed into `useState()` (which is `false`) in this case to `true` to see our Modal. 
+
+## Closing the `Modal` component
+
+We want to receive `props` and destructure `onClose` from it. 
+
+```jsx
+export default function Modal(props) {
+  const { onClose } = props;
+```
+
+So in `Main.jsx` we have to pass this prop `onClose` and also create the function handler, to pass into that prop:
+
+```jsx
+export default function Main() {
+  const [showModal, setShowModal] = useState(true);
+
+  {/* Create the onClose handler */}
+  function onCloseHandler () {
+    setShowModal(false);
+  }
+
+  return (
+    <div className='p-4 flex flex-col flex-1 md:grid md:grid-cols-4 gap-4'>
+      { showModal && <Modal onClose={onCloseHandler} /> }
+
+        {/* Rest of code... */}
+    </div>
+  )
+}
+```
+
+WE have to reference that function passed in as a prop for the `x` icon:
+
+In `Modal.jsx`:
+```jsx
+<i onClick={onClose} className="fa-solid fa-xmark cursor-pointer
+text-white hover:scale-125"></i>
+```
+
+Now the Modal closes onClick of the "x" icon.
+

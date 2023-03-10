@@ -16,7 +16,7 @@ export default function Modal(props) {
     flex flex-col p-4 gap-2'>
       <div className="flex text-xl justify-between items-center">
         <h2>Projects</h2>
-        <i className="fa-solid fa-xmark cursor-pointer
+        <i onClick={onClose} className="fa-solid fa-xmark cursor-pointer
         text-white hover:scale-125"></i>
       </div>
       <div>
