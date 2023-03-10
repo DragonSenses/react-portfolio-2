@@ -1,7 +1,9 @@
 import React from 'react'
 import profilePic from '../assets/profile-pic.png'
 
-export default function AboutMe() {
+export default function AboutMe(props) {
+  const { openModal } = props;
+
   return (
     <div className="flex flex-col md:grid md:grid-cols-2">
       <div className='flex flex-col gap-3'>
@@ -18,7 +20,7 @@ export default function AboutMe() {
         using the latest technology. Lorem ipsum dolor sit amet consectetur 
         adipisicing elit. Dolores consequuntur a, ipsam modi culpa at!</p>
         <div className="my-10 flex items-center gap-4 text-sm sm:text-base">
-          <button className='rounded-full bg-gradient-to-r from-blue-700 to-violet-700 
+          <button onClick={openModal} className='rounded-full bg-gradient-to-r from-blue-700 to-violet-700 
           text-white px-4 py-2 hover:opacity-70 transition transition-duration:250ms'>projects</button>
           <a href="mailto:youremail@gmail.com" className='rounded-full text-purple-800 
           border border-solid border-violet-800 px-4 py-2 

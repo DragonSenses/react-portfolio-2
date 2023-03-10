@@ -1319,6 +1319,8 @@ export default function Main() {
 
   return (
     <div className='p-4 flex flex-col flex-1 md:grid md:grid-cols-4 gap-4'>
+
+      {/* Pass the onClose function as a prop */}
       { showModal && <Modal onClose={onCloseHandler} /> }
 
         {/* Rest of code... */}
@@ -1337,3 +1339,61 @@ text-white hover:scale-125"></i>
 
 Now the Modal closes onClick of the "x" icon.
 
+## Opening the `Modal` component
+
+We will tie this to `AboutMe` component, which means we will pass the props to `AboutMe` component within `Main.jsx`. 
+
+```jsx
+export default function Main() {
+  const [showModal, setShowModal] = useState(true);
+
+  function onCloseHandler () {
+    setShowModal(false);
+  }
+
+  {/* Create the openModal handler */}
+  function openModal(){
+    setShowModal(true);
+  }
+
+  return (
+    <div className='p-4 flex flex-col flex-1 md:grid md:grid-cols-4 gap-4'>
+      { showModal && <Modal onClose={onCloseHandler} /> }
+      <div className="md:col-span-3 flex flex-col gap-4">
+
+      {/* Pass the openModal function as a prop */}
+        <AboutMe openModal={openModal} />
+
+        {/* Rest of code... */}
+    </div>
+  )
+}
+```
+
+Now we receive it inside our `AboutMe` component as props by destructuring it, then apply the function `onClick` to our `button`.
+
+```jsx
+{/* Receieve the function as props, and destructure it out */}
+export default function AboutMe(props) {
+  const { openModal } = props;
+
+  return (
+    <div className="flex flex-col md:grid md:grid-cols-2">
+      <div className='flex flex-col gap-3'>
+        {/* ... */}
+
+        <div className="my-10 flex items-center gap-4 text-sm sm:text-base">
+
+          {/* Add openModal function to the onClick attribute of the button */}
+
+          <button onClick={openModal} className='rounded-full bg-gradient-to-r from-blue-700 to-violet-700 
+          text-white px-4 py-2 hover:opacity-70 transition transition-duration:250ms'>projects</button>
+          
+          {/* ... */}
+
+      </div>
+      {/* Rest of code... */}
+    </div>
+  )
+}
+```
