@@ -5,7 +5,7 @@ export default function Skills() {
     JavaScript: ['React', 'Node.js', 'Express.js', 'React Native', 'SvelteKit'],
     Java: ['Java 8', ,'JUnit5', 'Spring', 'Apache Maven'],
     Web: ['Git','TailwindCSS', 'SASS', 'Firebase', 'Netlify', 'Docker','Kubernetes'],
-    Database: ['MonogoDB', 'SQL', 'NoSQL',],
+    Database: ['MongoDB', 'SQL', 'NoSQL',],
     Design: ['Adobe InDesign','PhotoShop', 'Pixlr', 'Figma'],
   }
 
