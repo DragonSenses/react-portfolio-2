@@ -1191,13 +1191,36 @@ import React, { useState } from 'react'
 
 But its up to personal preference, in my case I would probably go with the former for now since I want to keep `default` imports and named imports separately. Check out [JavaScript Export and Import](https://javascript.info/import-export). 
 
-In short, **Named exports** force us ot use exactly the right name to import. **Default exports**, allows us to always choose the name when importing. 
+In short, **Named exports** force us to use exactly the right name to import. **Default exports**, allows us to always choose the name when importing. 
 
 Let's add this line right below the `Main` function, but above the `return` 
 
 ```jsx
   const [showModal, setShowModal] = useState(false);
 ```
+
+# The problem with normal Modals
+
+When a Modal is contained within a wrapper `div` with certain styles applied to it, which creates a stacking context in CSS. In short, elements inside of it can never appear on top of the zIndex of 1, but if there is an adjacent `div` (sibiling) of the wrapper `div` containing the `Modal` with a zIndex of 2, it will always appear on top of the `Wrapper` which also appears on top of the `Modal` (even if you see the zIndex of the Modal to 9000). 
+
+We want Modal to appear over everything else no matter what. To do this, we use Portals.
+
+In React, in `index.js` we render the `<App />` component inside the root element of the `index.html`.
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  <React.StrictMode>,
+  document.getElementById('root')
+);
+```
+
+So we have to create another `div` with id of `portal` in `index.html` and render the Modal inside there. Using `React.createPortal()` from 'react-dom', with two parameters the Component to mount (add to the div), and the place where to add that element `document.getElementById('portal');`
 
 #### Create new component `Modal`
 
@@ -1213,7 +1236,7 @@ Now go to `index.html` and define a second root:
     <div id="portal"></div>
 ```
 
-The second div doesn't contain any information. We will be creating a [Portal](https://reactjs.org/docs/portals.html). 
+The second div doesn't contain any information. We will be creating a [Portal](https://reactjs.org/docs/portals.html), ***and mounting it to the div with the `id="portal"`. We need to create the modal in a separate `div` outside the root `div` so that we can render the modal on top of the existing content. 
 
 > Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
 
@@ -1396,4 +1419,30 @@ export default function AboutMe(props) {
     </div>
   )
 }
+```
+
+# Fill the Modal with Content
+
+```jsx
+  return ReactDOM.createPortal(
+    <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+    w-full h-full md:w-[80%] md:h-[80%] shadow text-white bg-slate-900 z-50 
+    flex flex-col p-4 gap-2'>
+      <div className="flex text-xl justify-between items-center">
+        <h2>Projects</h2>
+        <i onClick={onClose} className="fa-solid fa-xmark cursor-pointer
+        text-white hover:scale-125"></i>
+      </div>
+      <div className='flex items-center gap-1 bg-white flex-wrap'>
+        {projects.map((project, index) => {
+          return (
+            <div key={index} className='w-full aspect-video'>
+
+            </div>
+          )
+        })};
+      </div>
+    </div>,
+    document.getElementById('portal')
+  )
 ```
