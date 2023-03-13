@@ -1542,3 +1542,36 @@ Each project is an object with name, link, github link, description
 
 # Using generated Art to serve as the background
 
+Create Background component
+```jsx
+import React from 'react'
+import pic from '../assets/dragon-slate-100.jpg'
+
+export default function Background() {
+  return (
+    <img className='absolute inset-9 z-0 opacity-30 w-[80vw] h-[70vh]'
+    src={pic} alt='dragon'></img>
+  )
+}
+```
+
+Use it in `Main` and give it relative, and overflow-hidden properties
+
+```jsx
+  return (
+    <div className='p-4 flex flex-col flex-1 md:grid md:grid-cols-4 gap-4
+    relative overflow-hidden'>
+      { showModal && <Modal onClose={onCloseHandler} /> }
+      <div className="md:col-span-3 z-10 flex flex-col gap-4">
+        <AboutMe openModal={openModal} />
+        <Experience />
+      </div>
+      
+      <Background />
+      <Skills />
+    </div>
+  )
+}
+```
+
+Also add relative and z-10 to `Skills` so background won't overlap.
