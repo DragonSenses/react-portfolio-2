@@ -1539,3 +1539,6 @@ Each project is an object with name, link, github link, description
     document.getElementById('portal')
   )
 ```
+
+# Using generated Art to serve as the background
+

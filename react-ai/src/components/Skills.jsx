@@ -10,7 +10,7 @@ export default function Skills() {
   }
 
   return (
-    <div className='shadow-xl p-3 bg-white rounded flex flex-col gap-1 md:gap-4'>
+    <div className='shadow-xl p-3 bg-white rounded flex flex-col gap-1 md:gap-4 relative z-10'>
       
       <div className='flex flex-col gap-2'>
         <h1 className='text-4xl'>Info</h1>
