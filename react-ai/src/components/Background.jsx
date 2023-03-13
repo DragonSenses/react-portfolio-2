@@ -1,5 +1,5 @@
 import React from 'react'
-import pic from '../assets/dragon-slate-100.jpg'
+import pic from '../assets/dragon-slate-100_inverted.jpg'
 
 export default function Background() {
   return (
