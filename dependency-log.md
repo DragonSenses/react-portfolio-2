@@ -80,3 +80,30 @@ Would install the latest right before 3.0.0 (e.g. 2.11.1)
 
 ## Dependency log
 
+### 2024/05/27
+
+(May 27, 2024)
+
+```sh
+npm outdated
+
+Package               Current   Wanted   Latest  Location                           Depended by
+@types/react          18.0.28   18.3.3   18.3.3  node_modules/@types/react          react-ai
+@types/react-dom      18.0.11   18.3.0   18.3.0  node_modules/@types/react-dom      react-ai
+@vitejs/plugin-react    3.1.0    3.1.0    4.3.0  node_modules/@vitejs/plugin-react  react-ai
+autoprefixer          10.4.13  10.4.19  10.4.19  node_modules/autoprefixer          react-ai
+postcss                8.4.21   8.4.38   8.4.38  node_modules/postcss               react-ai
+react                  18.2.0   18.3.1   18.3.1  node_modules/react                 react-ai
+react-dom              18.2.0   18.3.1   18.3.1  node_modules/react-dom             react-ai
+tailwindcss             3.2.7    3.4.3    3.4.3  node_modules/tailwindcss           react-ai
+vite                    4.1.4    4.5.3   5.2.11  node_modules/vite                  react-ai
+```
+
+chore: Update dependencies to latest semver range
+
+```sh
+npm update --save
+
+@vitejs/plugin-react    3.1.0   3.1.0   4.3.0  node_modules/@vitejs/plugin-react  react-ai
+vite                    4.5.3   4.5.3  5.2.11  node_modules/vite                  react-ai
+```
