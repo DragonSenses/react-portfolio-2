@@ -1,7 +1,18 @@
 # Intro
 
-During the time of making this, A.I. (Artificial Intelligence) such as ChatGPT and Midjourney were generating so much attention. Wanted to try using the latest technologies to incorporate some of these into my personal projects. In this case I am using [Midjourney](https://midjourney.com/
-) AI's image generator. 
+During the time of making this, **A.I. (Artificial Intelligence)**, such as ChatGPT and Midjourney, garnered much attention. I wanted to try using the latest technologies to incorporate some of these into my personal projects. In this case I am using [Midjourney](https://midjourney.com/
+) AI's image generator.
+
+- Install [React and Tailwind CSS with Vite](https://tailwindcss.com/docs/guides/vite).
+
+## Checklist of features
+
+- [x] Responsive Web Design
+- [x] Mobile First
+- [x] Modal
+- [x] Sidebar
+- [x] CSS FlexBox
+- [x] CSS Grid
 
 # Using Midjourney AI - image generator
 
@@ -1575,3 +1586,4 @@ Use it in `Main` and give it relative, and overflow-hidden properties
 ```
 
 Also add relative and z-10 to `Skills` so background won't overlap.
+
