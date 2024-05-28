@@ -107,3 +107,10 @@ npm update --save
 @vitejs/plugin-react    3.1.0   3.1.0   4.3.0  node_modules/@vitejs/plugin-react  react-ai
 vite                    4.5.3   4.5.3  5.2.11  node_modules/vite                  react-ai
 ```
+
+chore: Update vite dependencies to latest versions
+
+```sh
+npm i vite@latest
+npm i @vitejs/plugin-react@latest
+```
